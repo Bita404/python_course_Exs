@@ -1,0 +1,14 @@
+def score_function():
+    try: 
+        score = float(input("Enter a score :"))
+        if 0<= score <= 20 :
+          return score
+        else :
+          print("Invalid score ! score must be between 0 and 20 ! ")
+          return score_function()
+    
+    except ValueError:
+        print("Invalid input ! ! ! Enter a number for score ! ")
+        score_function()
+
+score_function()  
