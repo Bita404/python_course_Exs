@@ -1,0 +1,112 @@
+tasks = {}
+
+def Add(name):
+    if name not in tasks:
+        tasks[name] = {"status": False, "duration": None}
+        print("Task Added Successfully!")
+    else:
+        print("This Task Already Exists!")
+
+def Display():
+    if tasks:
+        for i, (name, info) in enumerate(tasks.items()):
+            print(i+1, name, info["status"], info["duration"])
+    else:
+        print("No tasks to display!")
+
+def Remove(name):
+    if name in tasks:
+        tasks.pop(name)
+        print(f"{name} Task Removed Successfully!")
+    else:
+        print(f"'{name}' Not Found!")
+
+def Edit(name):
+    if name in tasks:
+        new_name = input("Enter the new name: ").lower()
+        if new_name not in tasks:
+            tasks[new_name] = tasks.pop(name)
+            print(f"Task Edited to {new_name} Successfully!")
+        else:
+            print("This Task Already Exists!")
+    else:
+        print("Task Not Found!")
+
+def Search(name):
+    if name in tasks:
+        info = tasks[name]
+        print(f"Task: {name}, Status: {info['status']}, Duration: {info['duration']}")
+    else:
+        print(f"'{name}' Task Not Found!")
+
+def Mark(name):
+    if name in tasks:
+        start = float(input("Enter The Start Time Hour: "))
+        end = float(input("Enter The End Time Hour: "))
+        if 1 <= start <= 24 and 1 <= end <= 24:
+            if end > start:
+                tasks[name]["duration"] = end - start
+            elif start > end:
+                tasks[name]["duration"] = end + (24 - start)
+            else:
+                tasks[name]["duration"] = 0
+            tasks[name]["status"] = True
+            print(f"Task Marked as Done: {name}")
+            print(f"Task: {name}, Status: {tasks[name]['status']}, Duration: {tasks[name]['duration']} hours")
+        else:
+            print("Invalid Time!")
+    else:
+        print(f"'{name}' Task Not Found!")
+
+def Details():
+    num_of_tasks = len(tasks)
+    hours_worked = [info['duration'] for info in tasks.values() if info['duration'] is not None]
+    total_hours = sum(hours_worked) if hours_worked else 0
+    done_tasks = sum(1 for info in tasks.values() if info['status'])
+    not_done_tasks = num_of_tasks - done_tasks
+    print(f"Number of Tasks: {num_of_tasks}")
+    print(f"Hours Worked: {total_hours}")
+    print(f"Number of Completed Tasks: {done_tasks}")
+    print(f"Number of Uncompleted Tasks: {not_done_tasks}")
+
+def Help():
+    print("Add: Adding a new task")
+    print("Display: Showing all task information")
+    print("Remove: Removing a task from the list")
+    print("Edit: Editing a task's name")
+    print("Search: Searching for a task")
+    print("Mark: Marking a task as done")
+    print("Details: Showing details of tasks")
+    print("Exit: Ends the program")
+
+
+for i in range(200):
+    answer = input("Add, Display, Remove, Edit, Search, Mark, Details, Help, Exit: ").lower()
+    
+    if answer == "add":
+        name = input("Task name: ").lower()
+        Add(name)
+    elif answer == "display":
+        Display()
+    elif answer == "remove":
+        name = input("Name for Remove: ").lower()
+        Remove(name)
+    elif answer == "edit":
+        name = input("Enter the task name for edit: ").lower()
+        Edit(name)
+    elif answer == "search":
+        name = input("Enter Task name: ").lower()
+        Search(name)
+    elif answer == "mark":
+        name = input("Task name: ").lower()
+        Mark(name)
+    elif answer == "details":
+        Details()
+    elif answer == "help":
+        Help()
+    elif answer == "exit":
+        break
+    elif answer == "":
+        continue
+    else:
+        print(f"{answer} Command Not Found!")
