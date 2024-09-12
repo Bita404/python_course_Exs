@@ -1,2 +1,2 @@
 # python_course_Exs
-exercises 
+exercises for pyhton and miniprojects 
