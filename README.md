@@ -1,2 +1,2 @@
 # 🍙 python_course_Exs 🍙
-exercises for pyhton and miniprojects 
+- exercises and miniprojects for pyhton 🚀
