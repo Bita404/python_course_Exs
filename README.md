@@ -2,3 +2,4 @@
 - exercises and miniprojects for pyhton 🚀
 - Python basics
 - oop
+- Data Base
